@@ -1,34 +1,44 @@
-# Gradle files
-.gradle/
-build/
+# =========================
+# Node / Discord bot
+# =========================
 
-# Local configuration file (sdk path, etc)
-local.properties
+# Dependencies
+node_modules/
 
-# Log/OS Files
+# Environment variables (NEVER COMMIT)
+.env
+.env.*   # e.g. .env.local, .env.production
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
 *.log
 
-# Android Studio generated files and folders
-captures/
-.externalNativeBuild/
-.cxx/
-*.aab
-*.apk
-output-metadata.json
-
-# IntelliJ
-*.iml
+# OS / Editor junk
+.DS_Store
+Thumbs.db
 .idea/
-misc.xml
-deploymentTargetDropDown.xml
-render.experimental.xml
+.vscode/
+*.swp
 
-# Keystore files
-*.jks
-*.keystore
+# Build output (if you add one later)
+dist/
+build/
 
-# Google Services (e.g. APIs or Firebase)
-google-services.json
+# SQLite database (if used)
+*.sqlite
+*.sqlite3
+database.db
 
-# Android Profiling
-*.hprof
+# PM2
+.pm2/
+pids/
+
+# Coverage / tests
+coverage/
+
+# Misc
+*.bak
+*.tmp
