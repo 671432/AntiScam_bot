@@ -1,5 +1,4 @@
 const { imageHash } = require("image-hash");
-const fetch = require("node-fetch");
 
 const hashes = new Map();
 

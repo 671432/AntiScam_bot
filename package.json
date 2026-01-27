@@ -4,7 +4,8 @@
     "discord.js": "^14.25.1",
     "dotenv": "^17.2.3",
     "image-hash": "^7.0.1",
+    "node-fetch": "^3.3.2",
     "sharp": "^0.34.5",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^5.0.2"
   }
 }
