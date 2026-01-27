@@ -8,28 +8,50 @@ module.exports = (client) => {
     if (message.author.bot) return;
     if (!message.guild) return;
 
-    const firstMatch = textSpam(message);
-    const isImageSpam = await imageSpam(message);
+    // Check text spam first
+    const firstTextMatch = textSpam(message);
 
-    // TEXT SPAM CASE
-    if (firstMatch) {
-      // quarantine first message
-      const channel = await message.guild.channels.fetch(firstMatch.channelId);
-      const firstMessage = await channel.messages.fetch(firstMatch.messageId);
+    if (firstTextMatch) {
+      const channel = await message.guild.channels.fetch(
+        firstTextMatch.channelId,
+      );
+      const firstMessage = await channel.messages
+        .fetch(firstTextMatch.messageId)
+        .catch(() => null);
 
-      await quarantine(firstMessage);
-
-      // quarantine second message
+      if (firstMessage) await quarantine(firstMessage);
       await quarantine(message);
 
-      await restrict(message.member);
+      if (!message.member) {
+        message.member = await message.guild.members
+          .fetch(message.author.id)
+          .catch(() => null);
+      }
+      if (message.member) await restrict(message.member);
       return;
     }
 
-    // IMAGE SPAM CASE (same logic, simpler for now)
-    if (isImageSpam) {
+    // Check image spam
+    const firstImageMatch = await imageSpam(message);
+
+    if (firstImageMatch) {
+      const channel = await message.guild.channels.fetch(
+        firstImageMatch.channelId,
+      );
+      const firstMessage = await channel.messages
+        .fetch(firstImageMatch.messageId)
+        .catch(() => null);
+
+      if (firstMessage) await quarantine(firstMessage);
       await quarantine(message);
-      await restrict(message.member);
+
+      if (!message.member) {
+        message.member = await message.guild.members
+          .fetch(message.author.id)
+          .catch(() => null);
+      }
+      if (message.member) await restrict(message.member);
+      return;
     }
   });
 };
