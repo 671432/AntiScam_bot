@@ -38,8 +38,10 @@ module.exports = async (message) => {
     });
   }
 
-  // Send to quarantine channel
-  await quarantineChannel.send({ embeds: [embed] });
+  // Send to quarantine channel if defined
+  if (quarantineChannel) {
+    await quarantineChannel.send({ embeds: [embed] });
+  }
 
   // Send to mod-log if defined
   if (modLogChannel) {
