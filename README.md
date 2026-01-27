@@ -71,7 +71,7 @@ node src/index.js
 
 - The bot should now be online and active on your server.
 
-5. How It Works
+## How It Works
 
 - Any duplicate message sent by the same user within 5–10 minutes will be automatically removed.
 
